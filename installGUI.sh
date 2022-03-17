@@ -28,8 +28,5 @@ sudo apt install firefox-esr -y
 #install hamradio menu
 sudo apt install hamradiomenus -y
 
-#remove bad x11 video driver
-sudo rm -rf /usr/share/X11/xorg.conf.d/99-fturbo.conf
-
 #reboot system
 sudo reboot
