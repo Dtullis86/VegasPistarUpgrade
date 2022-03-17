@@ -4,7 +4,7 @@
 
 #copy scripts and make executable.
 sudo cp /home/pi-star/VegasPistarUpgrade/dmridupdate.sh /home/pi-star/dmridupdate.sh
-sudo chmod +x /home/pi-star/VegasPistarUpgrade/dmridupdate.sh
+sudo chmod +x /home/pi-star/dmridupdate.sh
 
 #install desktop files
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/dmridupdate.desktop /usr/share/applications/dmridupdate.desktop 
