@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name= Terminal BatMon
+Exec=/bin/sh -c 'sleep 2; sudo /home/pi-star/x708bat.py'
+Terminal=true
+Type=Application
+Categories=System

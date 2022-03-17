@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Reboot
+Exec=/bin/sh -c 'sleep 2; sudo reboot'
+Terminal=false
+Type=Application
+Categories=System
