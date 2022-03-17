@@ -45,66 +45,62 @@ Change Log.
 3/16/22 updated install for Hamclock
 Installation Instructions
 
-Note. If you currenlty have Pi-Star operating is is highly recommned a backup be taken prior to running any of the scripts. Pi-Star will need to be installed to an SD card. HDD support has not been tested at this time. DSI monitors have not been tested. All Scripts provided are to be used at your own risk and are not suppported by the Pi-Star developers. PISTAR MUST BE COMPLETELY WORKING BEFORE IMPLEMENTING ANY SCRIPTS IN THIS REPO. They installation of ham clock can not be done full screen and is not supported by clearsykinstitute.com
+3/17/22 streamlined the install scripts and updated install directions.
 
-    Flash SD Card with Pistar Distrubtion and Configure all settings.
+Note. If you currenlty have Pi-Star operating is is highly recommned a backup be taken prior to running any of the scripts. Pi-Star will need to be installed to an SD card. HDD support has not been tested at this time. DSI monitors have not been tested. All Scripts provided are to be used at your own risk and are not suppported by the Pi-Star developers. PISTAR MUST BE COMPLETELY WORKING BEFORE IMPLEMENTING ANY SCRIPTS IN THIS REPO. The installation of ham clock can not be done full screen and is not supported by clearsykinstitute.com. Intructions assume that pistar has been flashed and configured prior to begining and have a keyboard and monitor attached.
 
-    Boot Raspberry Pi and configure all Pi-Star Settings.
+    1) Login to the CLI and set pi-star to write mode using the command rpi-rw
 
-    Once configured save a backup configuration
+    2) Clone repo using the command git clone https://github.com/Dtullis86/VegasPistarUpgrade
 
-    Connect HDMI monitor and keyboard and reboot the system.
+    3) We need to edit the boot config file before proceeding. This can be done via command line. 
+        a) run the command sudo su 
+        b) run the command rpi-rw 
+        c) run the command nano /boot/config.txt 
+        d) go the last line and remove the # e) press ctrl+x, then y, then enter f) type exit to leave root user mode
 
-    login to the CLI and set pi-star to write mode using the command rpi-rw
+    4) Use the following command to set the expandfs.sh scirpt to executable. sudo chmod +x ./VegasPistarUpgrade/expandfs.sh
 
-    clone repo using the command git clone https://github.com/Dtullis86/VegasPistarUpgrade
+    5) Run script expandfs.sh script using command sudo ./VegasPistarUpgrade/expandfs.sh filesystem will be expanded and system will reboot
 
-    we need to edit the boot config file before proceeding. This can be done via command line. a) run the command sudo su b) run the command rpi-rw c) run the command nano /boot/config.txt d) go the last line and remove the # e) press ctrl+x, then y, then enter f) type exit to leave root user mode
+    6) Once the system has rebooted if you need to install the newest nextion driver plesae do so now. If not please skip to step 7.
+        a) Set the file system to write mode by using the command rpi-rw
+        b) The installation of the driver can be completed by running the command sudo ./VegasPistarUpgrade/NextionDriverInstaller/install.sh User intervention is required for this script and will will cause the system to reboot again.
 
-    Use the following command to set the expandfs.sh scirpt to executable. sudo chmod +x ./VegasPistarUpgrade/expandfs.sh
+    7) Once you are ready to install the gui please do so by using the command sudo ./VegasPistarUpgrade/installGUI.sh This command will take a while to run and will reboot the system when complete.
 
-    run script expandfs.sh script using command sudo ./VegasPistarUpgrade/expandfs.sh filesystem will be expanded and system will reboot
+    8) Once the sytem has rebooted additional applicaations will need to be installed. Launch the teminal and run the appropriate script.
+        a) If you are not using a x708board please use the command sudo ./VegasPistarUpgrade/appinstall.sh
+        b) If you are using an x708board please run the command ./VegasPistarUpgrade/x708files/x708install.sh
 
-    Once the system has rebooted if you are using a nextion screen the updated driver will need to be installed. If you are not using a nextion screen go ahead and skip this step. Set the file system to write mode by using the command rpi-rw then installation of the driver can be completed by running the command sudo ./NextionDriverInstaller/install.sh User intervention is required for this script and will will cause the system to reboot again.
+    9) Open terminal and enter sudo raspi-config. 
+    10) Select System Options then boot. Then Select Desktop Autologin. This corrects an issue where the desktop does not load all the way on startup.
 
-    Once the system has rebooted lgoin set the file system to write mode using the command using the command rpi-rw and thenrun script installGUI.sh using command sudo ./VegasPistarUpgrade/installGUI.sh This command will take a while to run and will reboot the system when complete.
+    11) open terminal and type in sudo raspi-config and go to system display options then screen blanking and disable it. This causes the display out to stop working and requires a hard reset of the device.
+    
+    This completes the basic install of the Vegas Pi-Star Upgrade. If you have a x708 board please continue if not You can install HamClock or an Alternative Dashboard below.
 
-    If you are using a x708 board skip to steps to install the X708 software. Once they system has been booted ths launch a terminal window and run the script appinstall.sh using command ./VegasPistarUpgrade/appinstall.sh This will install firefox and other scripts and synaptic package manager.
+    12) Run the command sudo /usr/local/bin/x708softsd.sh to verify the installation of the x708 was successful. This will cause the raspberry pi and x708 to power down. If this happens the installation was successful. If not run the command listed in step 7 to repair the GUI installation and attempt the verification again.
 
-    open terminal and enter sudo raspi-config. Select System Options then boot. Then Select Desktop Autologin. This corrects an issue where the desktop does not load all the way on startup.
+    13) If the node shuts down verify the alias has been created. Run the command x708off. This will shut they system down again.
+        a) if an error occurs run the command sudo printf "%s" "alias x708off='sudo /usr/local/bin/x708softsd.sh'" >> ./.bashrc
+        b) reboot the system using the command sudo reboot. once the system has rebooted attempt step 13 again.
 
-    Go to settings preferences then screensaver and change the mode to disabled. This causes the display out to stop working and requires a hard reset of the device.
+    14 )Now we need to edit the Pistar dashborad to use the x708scripts. Launch terminal and run the command to edit the power page of the pistar dashboard. sudo nano /var/www/dashboard/admin/power.php
 
-    open terminal and type in sudo raspi-config and go to system display options then screen blanking and disable it. This causes the display out to stop working and requires a hard reset of the device.
+        a) Locate the following line in the code. system('sudo sync && sudo sync && sudo sync && sudo mount -o remount,ro / > /dev/null &');
 
-This completes the basic installation of the Vegas Pi-Star upgrade.
+        b) edit the next line to be exactly exec('sudo /usr/local/bin/x708softsd.sh > /dev/null &');
 
-If you wish to install hamclock follow the instructions below.
-x708 board installaton process
+        c) close and save the file.
 
-    Launch Terminal
+    15) We need to enable the the auto safe shutdown by adding it to add it to rc.local 
+        a) sudo su 
+        b) open rc.local withe the command nano /etc/rc.local 
+        c). at the bottom of the file just above exit 0 add the line /usr/local/bin/x708asd.py &
+        d) reboot the system and installion of the x708 will be complete.
 
-    run script x708install script by running the command sudo ./VegasPistarUpgrade/x708install.sh
-
-    run command to verify installaion was succssful. sudo /usr/local/bin/x708softsd.sh then reboot the system. This will cause the raspberry pi and x708 to power down. If this happens the installation was successful. If not run the command listed in step 12 to repair the GUI installation and attempt the verification again.
-
-    If the node shuts down an alias will need to be created. Power the system backup launch a terminal and run the command below this will allow you to shutdown the system using x708off. sudo printf "%s" "alias x708off='sudo /usr/local/bin/x708softsd.sh'" >> ./.bashrc
-
-    Now we need to edit the Pistar dashborad to use the x708scripts. Launch terminal and run the command to edit the power page of the pistar dashboard. sudo nano /var/www/dashboard/admin/power.php
-
-    Locate the following line in the code. system('sudo sync && sudo sync && sudo sync && sudo mount -o remount,ro / > /dev/null &');
-
-    edit the next line to be exactly exec('sudo /usr/local/bin/x708softsd.sh > /dev/null &');
-
-    close and save the file.
-
-    run the x708appinstall script using the command ./VegasPiStarUpgrade/x708appinstall.sh
-
-    If you wanted to use the autoshutdown feature you will need to add it to rc.local a. sudo su b. open rc.local withe the command nano /etc/rc.local c. at the bottom of the file just above exit 0 add the line /usr/local/bin/x708asd.py &
-
-    reboot the system and installion of the x708 will be complete.
-
-INSTALLING HAMCLOCK. (under investigation)
+# INSTALLING HAMCLOCK.
 
 to install HamClock please use the scripts listed below for the resolution that you would like.
 
@@ -116,11 +112,10 @@ to install HamClock please use the scripts listed below for the resolution that 
 
     ./VegasPistarUpgrade/HamClockInstall/installhc3200x1920.sh
 
-Once Complete the following command will need to be run
+Vegas Pi-Star Upgrade with X708 is now complete
 
-    sudo cp ./VegasPistarUpgrade/HamClockInstall/hamclock.desktop /usr/share/applications/hamclock.desktop
 
-Alternate Dashboard for Pistar.
+# Alternate Dashboard for Pistar.
 
 An alterniative dashboard to the base PiStar can be found at Https://W0CHP.net. Please read his website before continuing.
 
