@@ -151,3 +151,5 @@ sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/dmridupdate.desktop /usr/s
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/reboot.desktop /usr/share/applications/reboot.desktop
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/hsdashboard.desktop /usr/share/applications/hsdashboard.desktop 
 
+#remove bad x11 video driver
+sudo rm -rf /usr/share/X11/xorg.conf.d/99-fturbo.conf
