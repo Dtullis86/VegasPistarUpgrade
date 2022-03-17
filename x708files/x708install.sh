@@ -143,7 +143,7 @@ sudo printf "%s" "alias x708off='sudo /usr/local/bin/x708softsd.sh'" >> ~/.bashr
 sudo apt update -y && sudo apt upgrade -y && sudo apt install python-smbus i2c-tools -y
 sudo cp /home/pi-star/VegasPistarUpgrade/dmridupdate.sh /home/pi-star/dmridupdate.sh
 sudo cp /home/pi-star/VegasPistarUpgrade/x708files/x708asd.py /usr/local/bin/x708asd.py
-sudo chmod +x /home/pi-star/VegasPistarUpgrade/dmridupdate.sh
+sudo chmod +x /home/pi-star/dmridupdate.sh
 sudo chmod +x /usr/local/bin/x708asd.py
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/battmon.desktop /usr/share/applications/battmon.desktop
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/x708shutdown.desktop /usr/share/applications/x708shutdown.desktop
