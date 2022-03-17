@@ -69,14 +69,16 @@ Note. If you currenlty have Pi-Star operating is is highly recommned a backup be
 
     7) Once you are ready to install the gui please do so by using the command sudo ./VegasPistarUpgrade/installGUI.sh This command will take a while to run and will reboot the system when complete.
 
-    8) Once the sytem has rebooted additional applicaations will need to be installed. Launch the teminal and run the appropriate script.
+    8) Once the sytem has rebooted additional applicaations will need to be installed. Launch the teminal and run the appropriate script. The system will reboot again.
         a) If you are not using a x708board please use the command sudo ./VegasPistarUpgrade/appinstall.sh
-        b) If you are using an x708board please run the command ./VegasPistarUpgrade/x708files/x708install.sh
+        b) If you are using an x708board please run the command sudo ./VegasPistarUpgrade/x708files/x708install.sh
 
     9) Open terminal and enter sudo raspi-config. 
     10) Select System Options then boot. Then Select Desktop Autologin. This corrects an issue where the desktop does not load all the way on startup.
 
     11) open terminal and type in sudo raspi-config and go to system display options then screen blanking and disable it. This causes the display out to stop working and requires a hard reset of the device.
+    
+    12) We need to remove a corupt video drive. Run the following command sud0
     
     This completes the basic install of the Vegas Pi-Star Upgrade. If you have a x708 board please continue if not You can install HamClock or an Alternative Dashboard below.
 
