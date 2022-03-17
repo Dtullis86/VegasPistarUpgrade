@@ -78,8 +78,10 @@ Note. If you currenlty have Pi-Star operating is is highly recommned a backup be
 
     11) open terminal and type in sudo raspi-config and go to system display options then screen blanking and disable it. This causes the display out to stop working and requires a hard reset of the device.
     
-    12) We need to remove a corupt video drive. Run the following command sud0
-    
+    12) We need to remove a corupt video drive. Run the following command sudo rm -rf /usr/share/X11/xorg.conf.d/99-fturbo.conf
+
+    13) reboot the system with the command sudo reboot.
+
     This completes the basic install of the Vegas Pi-Star Upgrade. If you have a x708 board please continue if not You can install HamClock or an Alternative Dashboard below.
 
     12) Run the command sudo /usr/local/bin/x708softsd.sh to verify the installation of the x708 was successful. This will cause the raspberry pi and x708 to power down. If this happens the installation was successful. If not run the command listed in step 7 to repair the GUI installation and attempt the verification again.
