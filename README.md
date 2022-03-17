@@ -84,13 +84,13 @@ Note. If you currenlty have Pi-Star operating is is highly recommned a backup be
 
     This completes the basic install of the Vegas Pi-Star Upgrade. If you have a x708 board please continue if not You can install HamClock or an Alternative Dashboard below.
 
-    12) Run the command sudo /usr/local/bin/x708softsd.sh to verify the installation of the x708 was successful. This will cause the raspberry pi and x708 to power down. If this happens the installation was successful. If not run the command listed in step 7 to repair the GUI installation and attempt the verification again.
+    14) Run the command sudo /usr/local/bin/x708softsd.sh to verify the installation of the x708 was successful. This will cause the raspberry pi and x708 to power down. If this happens the installation was successful. If not run the command listed in step 7 to repair the GUI installation and attempt the verification again.
 
-    13) If the node shuts down verify the alias has been created. Run the command x708off. This will shut they system down again.
+    15) If the node shuts down verify the alias has been created. Run the command x708off. This will shut they system down again.
         a) if an error occurs run the command sudo printf "%s" "alias x708off='sudo /usr/local/bin/x708softsd.sh'" >> ./.bashrc
         b) reboot the system using the command sudo reboot. once the system has rebooted attempt step 13 again.
 
-    14 )Now we need to edit the Pistar dashborad to use the x708scripts. Launch terminal and run the command to edit the power page of the pistar dashboard. sudo nano /var/www/dashboard/admin/power.php
+    16 )Now we need to edit the Pistar dashborad to use the x708scripts. Launch terminal and run the command to edit the power page of the pistar dashboard. sudo nano /var/www/dashboard/admin/power.php
 
         a) Locate the following line in the code. system('sudo sync && sudo sync && sudo sync && sudo mount -o remount,ro / > /dev/null &');
 
@@ -98,7 +98,7 @@ Note. If you currenlty have Pi-Star operating is is highly recommned a backup be
 
         c) close and save the file.
 
-    15) We need to enable the the auto safe shutdown by adding it to add it to rc.local 
+    17) We need to enable the the auto safe shutdown by adding it to add it to rc.local 
         a) sudo su 
         b) open rc.local withe the command nano /etc/rc.local 
         c). at the bottom of the file just above exit 0 add the line /usr/local/bin/x708asd.py &
@@ -108,13 +108,13 @@ Note. If you currenlty have Pi-Star operating is is highly recommned a backup be
 
 to install HamClock please use the scripts listed below for the resolution that you would like.
 
-    ./VegasPistarUpgrade/HamClockInstall/installhc800x480.sh
+    ./VegasPistarUpgrade/hamclockinstall/installhc800x480.sh
 
-    ./VegasPistarUpgrade/HamClockInstall/installhc4600x960.sh
+    ./VegasPistarUpgrade/hamclockinstall/installhc4600x960.sh
 
-    ./VegasPistarUpgrade/HamClockInstall/installhc2400x1440.sh
+    ./VegasPistarUpgrade/hamclockinstall/installhc2400x1440.shveg
 
-    ./VegasPistarUpgrade/HamClockInstall/installhc3200x1920.sh
+    ./VegasPistarUpgrade/hamclockinstall/installhc3200x1920.sh
 
 Vegas Pi-Star Upgrade with X708 is now complete
 
@@ -130,7 +130,7 @@ An alterniative dashboard to the base PiStar can be found at Https://W0CHP.net. 
      b) Without changing the current CSS.
              curl -Ls https://w0chp.net/WPSD-Install | sudo env NO_SELF_UPDATE=1 bash -s -- -id
 
-    If you have already installed the x708board please redo steps 5 and 6 of the x708 install to correct the shutdown button.
+    If you have already installed the x708board please redo step 16 of the x708 install to correct the shutdown button.
 
     Once you have installed the dashboard you will need to run the script w0chpappinstall by using command sudo ./VegasPistarUpgrade/w0chpdashboard/w0chpinstall.sh
 
