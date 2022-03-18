@@ -137,7 +137,7 @@ raw_input("Testing Started")
 ' > /home/pi-star/x708pld.py
 sudo chmod +x /home/pi-star/x708pld.py
 
-sudo printf "%s" "alias x708off='sudo /usr/local/bin/x708softsd.sh'" >> ~/.bashrc
+sudo printf "%s" "alias x708off='sudo /usr/local/bin/x708softsd.sh'" >> /home/pi-star/.bashrc
 
 #install additional files for PiStar upgrade
 sudo apt update -y && sudo apt upgrade -y && sudo apt install python-smbus i2c-tools -y
