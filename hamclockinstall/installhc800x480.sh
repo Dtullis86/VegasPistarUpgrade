@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-sudo apt-get update &&sudo apt install -y curl install make g++ libx11-dev xserver-xorg raspberrypi-ui-mods lightdm lxsession openssl
+sudo apt-get update && sudo apt install -y g++ libx11-dev xserver-xorg raspberrypi-ui-mods lightdm lxsession openssl
 
 rm -fr ESPHamClock
 curl -O https://www.clearskyinstitute.com/ham/HamClock/ESPHamClock.zip
