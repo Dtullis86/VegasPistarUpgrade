@@ -139,8 +139,9 @@ sudo chmod +x /home/pi-star/x708pld.py
 
 sudo printf "%s" "alias x708off='sudo /usr/local/bin/x708softsd.sh'" >> /home/pi-star/.bashrc
 
-#install additional files for PiStar upgrade
+#install additional files and applications for PiStar upgrade
 sudo apt update -y && sudo apt upgrade -y && sudo apt install python-smbus i2c-tools -y
+sudo wget https://raw.githubusercontent.com/km4ack/pi-scripts/master/getcall -O /home/pi-star/getcall
 sudo cp /home/pi-star/VegasPistarUpgrade/dmridupdate.sh /home/pi-star/dmridupdate.sh
 sudo cp /home/pi-star/VegasPistarUpgrade/x708files/x708asd.py /usr/local/bin/x708asd.py
 sudo chmod +x /home/pi-star/dmridupdate.sh
@@ -149,4 +150,8 @@ sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/battmon.desktop /usr/share
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/x708shutdown.desktop /usr/share/applications/x708shutdown.desktop
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/dmridupdate.desktop /usr/share/applications/dmridupdate.desktop
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/reboot.desktop /usr/share/applications/reboot.desktop
-sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/hsdashboard.desktop /usr/share/applications/hsdashboard.desktop 
+sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/hsdashboard.desktop /usr/share/applications/hsdashboard.desktop
+udo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/chirp.desktop /usr/share/applications/chirp.desktop
+sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/wsjtx.desktop /usr/share/applications/wsjtx.desktop
+sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/getcall.desktop /usr/share/applications/getcall.desktop
+sudo apt install -y wjstx chirp rpi-imager yad
