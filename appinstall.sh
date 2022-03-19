@@ -3,8 +3,10 @@
 # written by Daniel Tullis aka KD7RED for Vegas PiStar Upgrade
 
 #copy scripts and make executable.
+sudo wget https://raw.githubusercontent.com/km4ack/pi-scripts/master/getcall -O /home/pi-star/getcall
 sudo cp /home/pi-star/VegasPistarUpgrade/dmridupdate.sh /home/pi-star/dmridupdate.sh
 sudo chmod +x /home/pi-star/dmridupdate.sh
+sudo chmod +x /home/pi-star/getcall
 
 #install desktop files
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/dmridupdate.desktop /usr/share/applications/dmridupdate.desktop 
