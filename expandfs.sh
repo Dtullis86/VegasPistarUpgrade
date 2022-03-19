@@ -18,6 +18,9 @@ sudo chmod +x /home/pi-star/VegasPistarUpgrade/w0chpdashboard/w0chpappinstall.sh
 sudo chmod +x /home/pi-star/VegasPistarUpgrade/hamclockinstall/installhc*
 
 
+#update & upgrade Pistar
+pistar-update && pistar-upgrade
+
 #expand filesystem
 sudo pistar-expand
 
