@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Call Sign Lookup
+Exec=/home/pi-star/getcall
+Terminal=false
+Type=Application
+Categories=HamRadio
