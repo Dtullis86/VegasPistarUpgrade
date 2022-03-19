@@ -47,6 +47,8 @@ Installation Instructions
 
 3/17/22 streamlined the install scripts and updated install directions.
 
+3/19/22 streamlined scripts, updated hamclock scripts, added additonal programs to the build.
+
 Note. If you currenlty have Pi-Star operating is is highly recommned a backup be taken prior to running any of the scripts. Pi-Star will need to be installed to an SD card. HDD support has not been tested at this time. DSI monitors have not been tested. All Scripts provided are to be used at your own risk and are not suppported by the Pi-Star developers. PISTAR MUST BE COMPLETELY WORKING BEFORE IMPLEMENTING ANY SCRIPTS IN THIS REPO. The installation of ham clock can not be done full screen and is not supported by clearsykinstitute.com. Intructions assume that pistar has been flashed and configured prior to begining and have a keyboard and monitor attached.
 
     1) Login to the CLI and set pi-star to write mode using the command rpi-rw
