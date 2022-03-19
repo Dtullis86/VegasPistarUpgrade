@@ -19,6 +19,9 @@ sudo chown -R pi-star:pi-star /home/pi-star/.config
 # Force the disk to be RW on boot
 sudo sed -i 's/mount -o remount,ro \///g' /etc/rc.local
 
+#install x11 dev
+sudo apt install libx11-dev
+
 #install pixel desktop
 sudo apt --reinstall install raspberrypi-ui-mods -y
 
