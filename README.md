@@ -5,8 +5,7 @@ Vegas Pi-Star Upgrade Mods Currently under Development by KD7RED
 All mods in the respoitory will only work with Pi-Star. Not all scripts are necessary but can be used depending on your hardware setup. This has been tested on a RPI3B and Pi4/2gb
 Current Known Bugs
 
-Once installed adding wifi via the pi-star dashboard will not work.
-Change Log.
+# Change Log.
 
 2/13/22 initial upload to GIThub. x708 scripts are desinged to work with version 1.2 of the x708 board and Pistar Exclusivly. Automatic shutdown has not been implemented at this time as there has been no testing completed. Script has been included in the repo.
 
@@ -49,6 +48,7 @@ Installation Instructions
 
 3/19/22 streamlined scripts, updated hamclock scripts, added additonal programs to the build.
 
+# Installation Instructions
 Note. If you currenlty have Pi-Star operating is is highly recommned a backup be taken prior to running any of the scripts. Pi-Star will need to be installed to an SD card. HDD support has not been tested at this time. DSI monitors have not been tested. All Scripts provided are to be used at your own risk and are not suppported by the Pi-Star developers. PISTAR MUST BE COMPLETELY WORKING BEFORE IMPLEMENTING ANY SCRIPTS IN THIS REPO. The installation of ham clock can not be done full screen and is not supported by clearsykinstitute.com. Intructions assume that pistar has been flashed and configured prior to begining. It is recommened that a keyboard and monitor be connected to run all of the scripts.
 
 1) Login to the CLI and set pi-star to write mode, clone Git repot and sent first script as executable.
@@ -57,87 +57,135 @@ Note. If you currenlty have Pi-Star operating is is highly recommned a backup be
 rpi-rw && sudo git cline https://github.com/Dtullis86/VegasPistarUpgrade && sudo chmod +x ./VegasPistarUpgrade/expandfs.sh
 ```
 
-3) We need to edit the boot config file before proceeding. This can be done via command line. 
-        a) run the command sudo su 
-        b) run the command rpi-rw 
-        c) run the command nano /boot/config.txt 
-        d) go the last line and remove the # e) press ctrl+x, then y, then enter f) type exit to leave root user mode
+2) We need to edit the boot config file before executing any scripts in the git repo. Once you have run the commands below you will need to go to the last line and remove the # to uncomment the configuration. Once complete. Press ctrl+x, Then y then type exit.
 
-    4) Use the following command to set the expandfs.sh scirpt to executable. sudo chmod +x ./VegasPistarUpgrade/expandfs.sh
+```
+sudo su 
+rpi-rw 
+nano /boot/config.txt 
+```
 
-    5) Run script expandfs.sh script using command sudo ./VegasPistarUpgrade/expandfs.sh filesystem will be expanded and system will reboot
+4) Run script expandfs script this will cause the system to reboot and set all necessary scripts to be executable.
 
-    6) Once the system has rebooted if you need to install the newest nextion driver plesae do so now. If not please skip to step 7.
-        a) Set the file system to write mode by using the command rpi-rw
-        b) The installation of the driver can be completed by running the command sudo ./VegasPistarUpgrade/NextionDriverInstaller/install.sh User intervention is required for this script and will will cause the system to reboot again.
+```
+sudo ./VegasPistarUpgrade/expandfs.sh filesystem will be expanded and system will reboot
+```
 
-    7) Once you are ready to install the gui please do so by using the command sudo ./VegasPistarUpgrade/installGUI.sh This command will take a while to run and will reboot the system when complete.
+5) Once the system has rebooted if you need to install the newest nextion driver plesae do so now. it will casue the system to remboot and may take 2 runs to get all of the functionality of your HMI file to be operational. User intervention is required durring the execution of the script. This is necessary as the driver included in Pistar is not up to date. If you do not need to update the driver please skip to step 6.
 
-    8) Once the sytem has rebooted additional applicaations will need to be installed. Launch the teminal and run the appropriate script. The system will reboot again.
-        a) If you are not using a x708board please use the command sudo ./VegasPistarUpgrade/appinstall.sh
-        b) If you are using an x708board please run the command sudo ./VegasPistarUpgrade/x708files/x708install.sh
+```
+rpi-rw && ./VegasPistarUpgrade/NextionDriverInstaller/install.sh
+```
 
-    9) Open terminal and enter sudo raspi-config. 
-    10) Select System Options then boot. Then Select Desktop Autologin. This corrects an issue where the desktop does not load all the way on startup.
+6) Once you are ready to install the gui run the command below this will cause a reboot once complete. This command will take some time to complete
 
-    11) open terminal and type in sudo raspi-config and go to system display options then screen blanking and disable it. This causes the display out to stop working and requires a hard reset of the device.
+```
+sudo ./VegasPistarUpgrade/installGUI.sh
+```
+
+7) Once the sytem has rebooted additional applicaations will need to be installed. Launch the teminal and run the appropriate script. The system will reboot again.
+  a)If you are not using a x708board please use the command
+```
+sudo ./VegasPistarUpgrade/appinstall.sh
+```
+
+  b) If you are using an x708board please run the command 
+  
+```
+sudo ./VegasPistarUpgrade/x708files/x708install.sh
+```
+
+8) Open terminal and use raspi-config editor using the command below. Select System Options then boot. Then Select Desktop Autologin. This corrects an issue where the desktop does not load all the way on startup. You will also want to set the localisations options at this time. When you close out of the raspi-confg do not reboot the system.
+
+```
+sudo raspi-config
+```
     
-    12) We need to remove a corupt video drive. Run the following command sudo rm -rf /usr/share/X11/xorg.conf.d/99-fturbo.conf
+9) Pistar uses a video driver that is not compatable with many applications. We need need to remove it and reboot the system. Run the following command. this command will also rebot the system.
 
-    13) reboot the system with the command sudo reboot.
+```
+sudo rm -rf /usr/share/X11/xorg.conf.d/99-fturbo.conf && sudo reboot
+```
 
-    This completes the basic install of the Vegas Pi-Star Upgrade. If you have a x708 board please continue if not You can install HamClock or an Alternative Dashboard below.
+# This completes the basic install of the Vegas Pi-Star Upgrade. If you have a x708 board please continue if not You can install HamClock or an Alternative Dashboard below.
 
-    14) Run the command sudo /usr/local/bin/x708softsd.sh to verify the installation of the x708 was successful. This will cause the raspberry pi and x708 to power down. If this happens the installation was successful. If not run the command listed in step 7 to repair the GUI installation and attempt the verification again.
+10) Run the command below to verify the installation of the x708 was successful. This will cause the raspberry pi and x708 to power down. If this happens the installation was successful.
 
-    15) If the node shuts down verify the alias has been created. Run the command x708off. This will shut they system down again.
-        a) if an error occurs run the command sudo printf "%s" "alias x708off='sudo /usr/local/bin/x708softsd.sh'" >> ./.bashrc
-        b) reboot the system using the command sudo reboot. once the system has rebooted attempt step 13 again.
+```
+x708off
+```
 
-    16 )Now we need to edit the Pistar dashborad to use the x708scripts. Launch terminal and run the command to edit the power page of the pistar dashboard. sudo nano /var/www/dashboard/admin/power.php
+If the node shuts down the scripts for the 708 board have been installed successfully. If not see additional troubleshooting documentation.     
 
-        a) Locate the following line in the code. system('sudo sync && sudo sync && sudo sync && sudo mount -o remount,ro / > /dev/null &');
+11) Now we need to edit the Pistar dashborad to use the x708scripts. Launch terminal and run the command to edit the power page of the pistar dashboard. 
 
-        b) edit the next line to be exactly exec('sudo /usr/local/bin/x708softsd.sh > /dev/null &');
+```
+sudo nano /var/www/dashboard/admin/power.php
+```
+  a) Locate the following line in the code. system('sudo sync && sudo sync && sudo sync && sudo mount -o remount,ro / > /dev/null &');
+  b) edit the next line to be exactly exec('sudo /usr/local/bin/x708softsd.sh > /dev/null &');
+  c) close and save the file.
 
-        c) close and save the file.
+12) We need to enable the the auto safe shutdown by adding it to add it to rc.local
+```
+sudo su
+rpi-rw
+nano /etc/rc.local 
+```
 
-    17) We need to enable the the auto safe shutdown by adding it to add it to rc.local 
-        a) sudo su 
-        b) open rc.local withe the command nano /etc/rc.local 
-        c). at the bottom of the file just above exit 0 add the line /usr/local/bin/x708asd.py &
-        d) reboot the system and installion of the x708 will be complete.
+ At the bottom of the file just above exit 0 add the line
+ 
+ ```
+ /usr/local/bin/x708asd.py &
+ ```
+ Press Ctrl+x then enter to save the file then reboot the system and installion of the x708 will be complete.
+
+```
+sudo reboot
+```
 
 # INSTALLING HAMCLOCK.
 
-to install HamClock please use the scripts listed below for the resolution that you would like.
+To install HamClock please use the scripts listed below for the resolution that you would like.
 
-    ./VegasPistarUpgrade/hamclockinstall/installhc800x480.sh
-
-    ./VegasPistarUpgrade/hamclockinstall/installhc4600x960.sh
-
-    ./VegasPistarUpgrade/hamclockinstall/installhc2400x1440.shveg
-
-    ./VegasPistarUpgrade/hamclockinstall/installhc3200x1920.sh
-
-Vegas Pi-Star Upgrade with X708 is now complete
+```
+./VegasPistarUpgrade/hamclockinstall/installhc800x480.sh
+./VegasPistarUpgrade/hamclockinstall/installhc4600x960.sh
+./VegasPistarUpgrade/hamclockinstall/installhc2400x1440.sh
+./VegasPistarUpgrade/hamclockinstall/installhc3200x1920.sh
+```
 
 
 # Alternate Dashboard for Pistar.
 
 An alterniative dashboard to the base PiStar can be found at Https://W0CHP.net. Please read his website before continuing.
 
-    To install the dashboard use one of the following commands.
+1) To install the dashboard use one of the following commands.
+  a) With the default CSS for the for the new dashboard.
 
-     a) With the default CSS for the for the new dashboard.
-             curl -Ls https://w0chp.net/WPSD-Install | sudo env NO_SELF_UPDATE=1 bash -s -- -idc
-     b) Without changing the current CSS.
-             curl -Ls https://w0chp.net/WPSD-Install | sudo env NO_SELF_UPDATE=1 bash -s -- -id
+```
+curl -Ls https://w0chp.net/WPSD-Install | sudo env NO_SELF_UPDATE=1 bash -s -- -idc
+```
 
-    If you have already installed the x708board please redo step 16 of the x708 install to correct the shutdown button.
+  b) Without changing the current CSS.
+```
+curl -Ls https://w0chp.net/WPSD-Install | sudo env NO_SELF_UPDATE=1 bash -s -- -id
+```
 
-    Once you have installed the dashboard you will need to run the script w0chpappinstall by using command sudo ./VegasPistarUpgrade/w0chpdashboard/w0chpinstall.sh
+2) If you have already installed the x708board please redo step 11 of the x708 install to correct the shutdown button.
 
-    To enable the Branmeister API that is part of the dashboard you will need to generate an API key. a) Follow the instructions at this website to do so. https://news.brandmeister.network/introducing-user-api-keys/
+3)Once you have installed the dashboard you will need to run the script w0chpappinstall by using command below 
 
-    Once you have generated the key edit the file bmapi.key using the command sudo nano /etc/bmapi.key a) delete the section , enter your key, and then save and exit the file by pressing ctrl+x then enter.
+```
+sudo ./VegasPistarUpgrade/w0chpdashboard/w0chpinstall.sh
+```
+
+4) To enable the Branmeister API that is part of the dashboard you will need to generate an API key. a) Follow the instructions at this website to do so. https://news.brandmeister.network/introducing-user-api-keys/
+
+5) Once you have generated the key edit the file bmapi.key
+
+```
+sudo nano /etc/bmapi.key 
+```
+
+delete the section that says <key goes here> , enter your key, and then save and exit the file by pressing ctrl+x then enter.
