@@ -16,7 +16,8 @@ sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/hsdashboard.desktop /usr/s
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/chirp.desktop /usr/share/applications/chirp.desktop
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/wsjtx.desktop /usr/share/applications/wsjtx.desktop
 sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/getcall.desktop /usr/share/applications/getcall.desktop
+sudo cp /home/pi-star/VegasPistarUpgrade/desktopfiles/gpredict.desktop /usr/share/applications/gpredict
 
 #add applications
 sudo apt update
-sudo apt install -y wjstx chirp rpi-imager yad
+sudo apt install -y wjstx chirp rpi-imager yad gpredict
